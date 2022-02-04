@@ -1,0 +1,14 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mmsquasardashboard-dev-21545-authRole",
+      "UnauthRoleArn": "arn:aws:iam::004720906935:role/amplify-mmsquasardashboard-dev-21545-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::004720906935:role/amplify-mmsquasardashboard-dev-21545-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-mmsquasardashboard-dev-21545-deployment",
+      "UnauthRoleName": "amplify-mmsquasardashboard-dev-21545-unauthRole",
+      "StackName": "amplify-mmsquasardashboard-dev-21545",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:004720906935:stack/amplify-mmsquasardashboard-dev-21545/48f80e80-858a-11ec-8c16-0285929e157c"
+    }
+  }
+}
