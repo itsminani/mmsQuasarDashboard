@@ -21,6 +21,7 @@
           no-caps
           @click="exportTable"
         />
+        
       </template>
     </q-table>
   </div>
