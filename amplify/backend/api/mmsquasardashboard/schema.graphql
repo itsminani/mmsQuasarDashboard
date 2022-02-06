@@ -1,5 +1,6 @@
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
+
 type ReportingTable @model {
   id: String!
   archived_mails: String
