@@ -8,10 +8,9 @@ export const createReportingTable = /* GraphQL */ `
   ) {
     createReportingTable(input: $input, condition: $condition) {
       id
-      archived_mails
-      criticalDelays
       last_updated
       total_mails
+      mailsBody
       createdAt
       updatedAt
     }
@@ -24,10 +23,9 @@ export const updateReportingTable = /* GraphQL */ `
   ) {
     updateReportingTable(input: $input, condition: $condition) {
       id
-      archived_mails
-      criticalDelays
       last_updated
       total_mails
+      mailsBody
       createdAt
       updatedAt
     }
@@ -40,10 +38,9 @@ export const deleteReportingTable = /* GraphQL */ `
   ) {
     deleteReportingTable(input: $input, condition: $condition) {
       id
-      archived_mails
-      criticalDelays
       last_updated
       total_mails
+      mailsBody
       createdAt
       updatedAt
     }

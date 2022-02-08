@@ -6,6 +6,13 @@
   <router-view/>
 </template>
 
+<script>
+export default {
+  created() {
+    this.$store.dispatch("mails/fetchAnalytics")
+  },
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

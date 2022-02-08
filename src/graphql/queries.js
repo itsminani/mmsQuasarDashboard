@@ -5,10 +5,9 @@ export const getReportingTable = /* GraphQL */ `
   query GetReportingTable($id: ID!) {
     getReportingTable(id: $id) {
       id
-      archived_mails
-      criticalDelays
       last_updated
       total_mails
+      mailsBody
       createdAt
       updatedAt
     }
@@ -23,10 +22,9 @@ export const listReportingTables = /* GraphQL */ `
     listReportingTables(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        archived_mails
-        criticalDelays
         last_updated
         total_mails
+        mailsBody
         createdAt
         updatedAt
       }

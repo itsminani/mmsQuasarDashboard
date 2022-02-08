@@ -6,4 +6,8 @@ import store from './store'
 import { Quasar } from 'quasar'
 import quasarUserOptions from './quasar-user-options'
 
+import Amplify from "aws-amplify";
+import awsExports from "./aws-exports";
+Amplify.configure(awsExports);
+
 createApp(App).use(Quasar, quasarUserOptions).use(store).use(router).mount('#app')

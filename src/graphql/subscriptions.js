@@ -5,10 +5,9 @@ export const onCreateReportingTable = /* GraphQL */ `
   subscription OnCreateReportingTable {
     onCreateReportingTable {
       id
-      archived_mails
-      criticalDelays
       last_updated
       total_mails
+      mailsBody
       createdAt
       updatedAt
     }
@@ -18,10 +17,9 @@ export const onUpdateReportingTable = /* GraphQL */ `
   subscription OnUpdateReportingTable {
     onUpdateReportingTable {
       id
-      archived_mails
-      criticalDelays
       last_updated
       total_mails
+      mailsBody
       createdAt
       updatedAt
     }
@@ -31,10 +29,9 @@ export const onDeleteReportingTable = /* GraphQL */ `
   subscription OnDeleteReportingTable {
     onDeleteReportingTable {
       id
-      archived_mails
-      criticalDelays
       last_updated
       total_mails
+      mailsBody
       createdAt
       updatedAt
     }
