@@ -1,8 +1,8 @@
-export function getReportingMails(state) {
-  return state.reportingMails;
+export function getCreatedgMails(state) {
+  return state.createdMails;
 }
-export function getCriticalMails(state) {
-  return state.criticalMails;
+export function getUpdatedMails(state) {
+  return state.updatedMails;
 }
 export function getToSeeDoctorMails(state) {
   return state.toSeeDoctorMails;

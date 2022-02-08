@@ -1,7 +1,8 @@
 export default function () {
   return {
-    reportingMails: null,
-    criticalMails: null,
+    toSeeDoctorMails: null,
+    createdMails: null,
+    updatedMails: null,
     mails: null,
   };
 }

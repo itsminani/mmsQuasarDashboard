@@ -31,6 +31,7 @@ export const fetchAnalytics = async ({ commit }) => {
     }
     commit("SET_UPDATED_MAILS", updatedMails);
     commit("SET_CREATED_MAILS", createdMails);
+    commit("SET_TO_SEE_DOCTOR_MAILS", toSeeDoctorMails);
     commit("SET_ALL_MAILS", mails);
   } catch (error) {
     console.log(error);
