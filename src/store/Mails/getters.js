@@ -1,4 +1,4 @@
-export function getCreatedgMails(state) {
+export function getCreatedMails(state) {
   return state.createdMails;
 }
 export function getUpdatedMails(state) {

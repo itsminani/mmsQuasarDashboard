@@ -6,3 +6,9 @@ type ReportingTable @model {
   total_mails: String
   mailsBody: String
 }
+type AllMailsTable @model {
+  id: String!
+  last_updated: String
+  total_mails: String
+  mailsBody: String
+}

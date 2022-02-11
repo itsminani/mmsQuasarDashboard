@@ -1,153 +1,64 @@
 <template>
   <div class="q-pa-md">
-    <h3 class="title" style="text-align: center">To see doctor today</h3>
-    <q-table
-      v-if="rows"
-      title="To see Doctor Today"
-      :rows="rows"
-      :columns="columns"
-      :filter="filter"
-      row-key="name"
-    ><template v-slot:body-cell="props">
-      
-        <q-td  @click="redirectToApp(props.row.id)" :props="props">
-          <q-tooltip>
-          {{props.row.summary}}
-        </q-tooltip>
-         <div style="cursor: pointer">{{props.value}} </div> 
-        </q-td>
-      </template>
-      <template v-slot:top-right>
-        <q-input
-          borderless
-          dense
-          debounce="300"
-          v-model="filter"
-          placeholder="Search"
-        >
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-        <q-btn
-          color="primary"
-          icon-right="archive"
-          label="Export to csv"
-          no-caps
-          @click="exportTable"
-        />
-      </template>
-    </q-table>
+    <div v-if="rows">
+      <h3 class="title" style="text-align: center">Mails worked on in the past 30 days</h3>
+      <q-table
+        v-if="rows"
+        title="Mails worked on in the past 30 days"
+        :rows="rows"
+        :columns="columns"
+        :filter="filter"
+        row-key="name"
+        records-per-page=100
+        ><template v-slot:body-cell="props">
+          <q-td :props="props">
+            <q-tooltip anchor="top middle" self="top middle">
+              {{ props.row.summary }}
+            </q-tooltip>
+
+            <q-menu fit anchor="bottom middle" self="top middle">
+              <q-item clickable v-if="props.row.senderEmail != 'NA'">
+                <q-item-section :href="'mailto:' + props.row.senderEmail"
+                  >Email User</q-item-section
+                >
+              </q-item>
+              <q-item clickable @click="redirectToApp(props.row.id)">
+                <q-item-section>Open In Maily </q-item-section>
+              </q-item>
+            </q-menu>
+
+            <div style="cursor: pointer">{{ props.value }}</div>
+          </q-td>
+        </template>
+        <template v-slot:top-right>
+          <q-input
+            borderless
+            dense
+            debounce="300"
+            v-model="filter"
+            placeholder="Search"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+          <q-btn
+            color="primary"
+            icon-right="archive"
+            label="Export to csv"
+            no-caps
+            @click="exportTable"
+          />
+        </template>
+      </q-table>
+    </div>
+    
   </div>
 </template>
 
 <script>
 import { exportFile, useQuasar } from "quasar";
 import { ref } from "vue";
-import { mapGetters } from "vuex";
-
-const rows = [
-  {
-    name: "Frozen Yogurt",
-    calories: 159,
-    fat: 6.0,
-    carbs: 24,
-    protein: 4.0,
-    sodium: 87,
-    calcium: "14%",
-    iron: "1%",
-  },
-  {
-    name: "Ice cream sandwich",
-    calories: 237,
-    fat: 9.0,
-    carbs: 37,
-    protein: 4.3,
-    sodium: 129,
-    calcium: "8%",
-    iron: "1%",
-  },
-  {
-    name: "Eclair",
-    calories: 262,
-    fat: 16.0,
-    carbs: 23,
-    protein: 6.0,
-    sodium: 337,
-    calcium: "6%",
-    iron: "7%",
-  },
-  {
-    name: "Cupcake",
-    calories: 305,
-    fat: 3.7,
-    carbs: 67,
-    protein: 4.3,
-    sodium: 413,
-    calcium: "3%",
-    iron: "8%",
-  },
-  {
-    name: "Gingerbread",
-    calories: 356,
-    fat: 16.0,
-    carbs: 49,
-    protein: 3.9,
-    sodium: 327,
-    calcium: "7%",
-    iron: "16%",
-  },
-  {
-    name: "Jelly bean",
-    calories: 375,
-    fat: 0.0,
-    carbs: 94,
-    protein: 0.0,
-    sodium: 50,
-    calcium: "0%",
-    iron: "0%",
-  },
-  {
-    name: "Lollipop",
-    calories: 392,
-    fat: 0.2,
-    carbs: 98,
-    protein: 0,
-    sodium: 38,
-    calcium: "0%",
-    iron: "2%",
-  },
-  {
-    name: "Honeycomb",
-    calories: 408,
-    fat: 3.2,
-    carbs: 87,
-    protein: 6.5,
-    sodium: 562,
-    calcium: "0%",
-    iron: "45%",
-  },
-  {
-    name: "Donut",
-    calories: 452,
-    fat: 25.0,
-    carbs: 51,
-    protein: 4.9,
-    sodium: 326,
-    calcium: "2%",
-    iron: "22%",
-  },
-  {
-    name: "KitKat",
-    calories: 518,
-    fat: 26.0,
-    carbs: 65,
-    protein: 7,
-    sodium: 54,
-    calcium: "12%",
-    iron: "6%",
-  },
-];
 
 function wrapCsvValue(val, formatFn) {
   let formatted = formatFn !== void 0 ? formatFn(val) : val;
@@ -192,15 +103,20 @@ export default {
           sortable: true,
         },
         {
-          name: "date_to_see_doctor",
+          name: "typeOfMail",
           align: "center",
-          label: "Date to see Doctor",
-          field: "date_to_see_doctor",
+          label: "Type Of Mail",
+          field: "typeOfMail",
           sortable: true,
         },
-        { name: "status", label: "Status", field: "status", sortable: true },
-        {align: "center",
-
+        {
+          name: "status",
+          align: "center",
+          label: "Status",
+          field: "status",
+          sortable: true,
+        },
+        {
           name: "senderPhone",
           align: "center",
           label: "Phone Number",
@@ -222,24 +138,24 @@ export default {
           sortable: true,
         },
         {
-          name: "victimStatus",
-          align: "center",
-          label: "Victim Status",
-          field: "victimStatus",
-          sortable: true,
-        },
-        {
-          name: "incapacityRate",
-          align: "center",
-          label: "Incapacity Rate %",
-          field: "incapacityRate",
-          sortable: true,
-        },
-        {
           name: "insuredName",
           align: "center",
           label: "Insured Name",
           field: "insuredName",
+          sortable: true,
+        },
+        {
+          name: "estimatedIncidence",
+          align: "center",
+          label: "Estimated Incidence (RWF)",
+          field: "estimatedIncidence",
+          sortable: true,
+        },
+        {
+          name: "senderIdentity",
+          align: "center",
+          label: "Sender Identity",
+          field: "senderIdentity",
           sortable: true,
         },
         {
@@ -261,9 +177,9 @@ export default {
     };
   },
   methods: {
-    redirectToApp(id){
-      var link= "https://main.d1534lcmeg5n1i.amplifyapp.com/details/"+id;
-       window.open(link,"_blank");
+    redirectToApp(id) {
+      var link = "https://main.d1534lcmeg5n1i.amplifyapp.com/details/" + id;
+      window.open(link, "_blank");
     },
     exportTable() {
       // naive encoding to csv format
@@ -294,10 +210,10 @@ export default {
       }
     },
   },
-  computed: {
-    ...mapGetters({
-      rows: "mails/getToSeeDoctorMails",
-    }),
+  props: {
+    rows: {
+      type: Array,
+    },
   },
 };
 </script>
