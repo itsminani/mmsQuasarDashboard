@@ -1,15 +1,22 @@
 <template>
   <div class="q-pa-md">
-    {{mails}}
+    <h3 class="title" style="text-align: center">To see doctor today</h3>
     <q-table
-      v-if="mails"
-      title="Treats"
-      :rows="mails"
+      v-if="rows"
+      title="To see Doctor Today"
+      :rows="rows"
       :columns="columns"
-      color="primary"
-      row-key="name"
       :filter="filter"
-    >
+      row-key="name"
+    ><template v-slot:body-cell="props">
+      
+        <q-td  @click="redirectToApp(props.row.id)" :props="props">
+          <q-tooltip>
+          {{props.row.summary}}
+        </q-tooltip>
+         <div style="cursor: pointer">{{props.value}} </div> 
+        </q-td>
+      </template>
       <template v-slot:top-right>
         <q-input
           borderless
@@ -38,35 +45,6 @@
 import { exportFile, useQuasar } from "quasar";
 import { ref } from "vue";
 import { mapGetters } from "vuex";
-const columns = [
-  {
-    name: "claimNumber",
-    required: true,
-    label: "Claim Number",
-    align: "left",
-    field: "claimNumber",
-    format: val => `${val}`,
-    sortable: true,
-  },
-  {
-    name: "senderName",
-    align: "center",
-    label: "Sender Name",
-    field: "senderName",
-    sortable: true,
-  },
-  { name: "status", label: "Status", field: "status", sortable: true },
-  {
-    name: "assignedTo",
-    label: "Assigned To",
-    field: "assignedTo",
-    sortable: true,
-  },
-  // { name: 'protein', label: 'Protein (g)', field: 'protein',sortable: true },
-  // { name: 'sodium', label: 'Sodium (mg)', field: 'sodium',sortable: true },
-  // { name: 'calcium', label: 'Calcium (%)', field: 'calcium', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
-  // { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
-];
 
 const rows = [
   {
@@ -191,45 +169,134 @@ function wrapCsvValue(val, formatFn) {
 export default {
   setup() {
     const $q = useQuasar();
-
+  },
+  data() {
     return {
-      columns,
       filter: ref(""),
+      columns: [
+        {
+          name: "claimNumber",
+          required: true,
+          label: "Claim Number",
+          align: "left",
+          field: "claimNumber",
+          format: (val) => `${val}`,
+          sortable: true,
+        },
+        {
+          name: "senderName",
+          align: "center",
+          align: "center",
+          label: "Sender Name",
+          field: "senderName",
+          sortable: true,
+        },
+        {
+          name: "date_to_see_doctor",
+          align: "center",
+          label: "Date to see Doctor",
+          field: "date_to_see_doctor",
+          sortable: true,
+        },
+        { name: "status", label: "Status", field: "status", sortable: true },
+        {align: "center",
 
-      exportTable() {
-        // naive encoding to csv format
-        const content = [columns.map((col) => wrapCsvValue(col.label))]
-          .concat(
-            rows.map((row) =>
-              columns
-                .map((col) =>
-                  wrapCsvValue(
-                    typeof col.field === "function"
-                      ? col.field(row)
-                      : row[col.field === void 0 ? col.name : col.field],
-                    col.format
-                  )
-                )
-                .join(",")
-            )
-          )
-          .join("\r\n");
-
-        const status = exportFile("table-export.csv", content, "text/csv");
-
-        if (status !== true) {
-          $q.notify({
-            message: "Browser denied file download...",
-            color: "negative",
-            icon: "warning",
-          });
-        }
-      },
+          name: "senderPhone",
+          align: "center",
+          label: "Phone Number",
+          field: "senderPhone",
+          sortable: true,
+        },
+        {
+          name: "assignedTo",
+          align: "center",
+          label: "Assigned To",
+          field: "assignedTo",
+          sortable: true,
+        },
+        {
+          name: "receptionDate",
+          align: "center",
+          label: "Reception Date",
+          field: "receptionDate",
+          sortable: true,
+        },
+        {
+          name: "victimStatus",
+          align: "center",
+          label: "Victim Status",
+          field: "victimStatus",
+          sortable: true,
+        },
+        {
+          name: "incapacityRate",
+          align: "center",
+          label: "Incapacity Rate %",
+          field: "incapacityRate",
+          sortable: true,
+        },
+        {
+          name: "insuredName",
+          align: "center",
+          label: "Insured Name",
+          field: "insuredName",
+          sortable: true,
+        },
+        {
+          name: "senderEmail",
+          align: "center",
+          label: "Email",
+          field: "senderEmail",
+          sortable: true,
+        },
+        {
+          name: "transactionDate",
+          align: "center",
+          label: "Transaction Date",
+          field: "transactionDate",
+          sortable: true,
+        },
+        // Add a phone NUmber field and incapacity rate and body injury type
+      ],
     };
   },
-   computed: {
+  methods: {
+    redirectToApp(id){
+      var link= "https://main.d1534lcmeg5n1i.amplifyapp.com/details/"+id;
+       window.open(link,"_blank");
+    },
+    exportTable() {
+      // naive encoding to csv format
+      const content = [this.columns.map((col) => wrapCsvValue(col.label))]
+        .concat(
+          this.rows.map((row) =>
+            this.columns
+              .map((col) =>
+                wrapCsvValue(
+                  typeof col.field === "function"
+                    ? col.field(row)
+                    : row[col.field === void 0 ? col.name : col.field],
+                  col.format
+                )
+              )
+              .join(",")
+          )
+        )
+        .join("\r\n");
+
+      const status = exportFile("table-export.csv", content, "text/csv");
+      if (status !== true) {
+        $q.notify({
+          message: "Browser denied file download...",
+          color: "negative",
+          icon: "warning",
+        });
+      }
+    },
+  },
+  computed: {
     ...mapGetters({
-      mails: "mails/getToSeeDoctorMails",
+      rows: "mails/getToSeeDoctorMails",
     }),
   },
 };
@@ -237,18 +304,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.title {
+  margin: 10px 0 10px;
+  color: rgb(23, 58, 80);
 }
 </style>
