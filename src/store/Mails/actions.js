@@ -27,11 +27,17 @@ export const fetchAnalytics = async ({ commit }) => {
         toSeeDoctorMails = JSON.parse(toSeeDoctorMails.mailsBody);
         console.log(toSeeDoctorMails)
 
+      } else if(category.id== "Transaction") {
+        var transactionMails = category
+        transactionMails = JSON.parse(transactionMails.mailsBody);
+        console.log(transactionMails)
+
       }
     }
     commit("SET_UPDATED_MAILS", updatedMails);
     commit("SET_CREATED_MAILS", createdMails);
     commit("SET_TO_SEE_DOCTOR_MAILS", toSeeDoctorMails);
+    commit("SET_TRANSACTION_MAILS", transactionMails);
     commit("SET_ALL_MAILS", mails);
   } catch (error) {
     console.log(error);

@@ -7,6 +7,9 @@ export const SET_CREATED_MAILS= (state, Mails) => {
 export const SET_TO_SEE_DOCTOR_MAILS= (state, Mails) => {
   state.toSeeDoctorMails = Mails;
 };
+export const SET_TRANSACTION_MAILS= (state, Mails) => {
+  state.transactionMails = Mails;
+};
 export const SET_ALL_MAILS= (state, Mails) => {
   state.mails = Mails;
 };

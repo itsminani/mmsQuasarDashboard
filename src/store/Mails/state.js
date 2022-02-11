@@ -3,6 +3,7 @@ export default function () {
     toSeeDoctorMails: null,
     createdMails: null,
     updatedMails: null,
+    transactionMails: null,
     mails: null,
   };
 }

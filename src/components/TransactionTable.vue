@@ -1,10 +1,12 @@
 <template>
   <div class="q-pa-md">
     <div v-if="rows">
-      <h3 class="title" style="text-align: center">To see doctor today</h3>
+      <h3 class="title" style="text-align: center">
+        Mails with today's or tomorrow's transaction date
+      </h3>
       <q-table
         v-if="rows"
-        title="To see Doctor Today"
+        title="Mails By Transaction Date"
         :rows="rows"
         :columns="columns"
         :filter="filter"
@@ -17,9 +19,8 @@
 
             <q-menu fit anchor="bottom middle" self="top middle">
               <q-item clickable v-if="props.row.senderEmail != 'NA'">
-                <q-item-section>
-                  <a :href="'mailto:' + props.row.senderEmail"></a> Email
-                  User</q-item-section
+                <a :href="'mailto:' + props.row.senderEmail"
+                  ><q-item-section> Email User</q-item-section></a
                 >
               </q-item>
               <q-item clickable @click="redirectToApp(props.row.id)">
@@ -102,16 +103,20 @@ export default {
           sortable: true,
         },
         {
-          name: "date_to_see_doctor",
+          name: "typeOfMail",
           align: "center",
-          label: "Date to see Doctor",
-          field: "date_to_see_doctor",
+          label: "Type Of Mail",
+          field: "typeOfMail",
           sortable: true,
         },
-        { name: "status", label: "Status", field: "status", sortable: true },
         {
+          name: "status",
           align: "center",
-
+          label: "Status",
+          field: "status",
+          sortable: true,
+        },
+        {
           name: "senderPhone",
           align: "center",
           label: "Phone Number",
@@ -133,31 +138,24 @@ export default {
           sortable: true,
         },
         {
-          name: "victimStatus",
-          align: "center",
-          label: "Victim Status",
-          field: "victimStatus",
-          sortable: true,
-        },
-        {
-          name: "incapacityRate",
-          align: "center",
-          label: "Incapacity Rate %",
-          field: "incapacityRate",
-          sortable: true,
-        },
-        {
-          name: "radiantIncapacityRate",
-          align: "center",
-          label: "Radiant Rate %",
-          field: "radiantIncapacityRate",
-          sortable: true,
-        },
-        {
           name: "insuredName",
           align: "center",
           label: "Insured Name",
           field: "insuredName",
+          sortable: true,
+        },
+        {
+          name: "estimatedIncidence",
+          align: "center",
+          label: "Estimated Incidence (RWF)",
+          field: "estimatedIncidence",
+          sortable: true,
+        },
+        {
+          name: "senderIdentity",
+          align: "center",
+          label: "Sender Identity",
+          field: "senderIdentity",
           sortable: true,
         },
         {

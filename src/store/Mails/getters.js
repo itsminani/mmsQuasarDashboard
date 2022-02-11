@@ -7,6 +7,9 @@ export function getUpdatedMails(state) {
 export function getToSeeDoctorMails(state) {
   return state.toSeeDoctorMails;
 }
+export function getTransactionMails(state) {
+  return state.transactionMails;
+}
 export function getMails(state) {
   return state.mails;
 }
