@@ -89,7 +89,7 @@ export default {
       seeDoctorRows: "mails/getToSeeDoctorMails",
       updatedAtRows: "mails/getUpdatedMails",
       createdAtRows: "mails/getCreatedMails",
-      transactionRows: "mails/getCreatedMails",
+      transactionRows: "mails/getTransactionMails",
     }),
   },
 };
