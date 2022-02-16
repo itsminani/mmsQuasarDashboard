@@ -10,6 +10,7 @@ export function getToSeeDoctorMails(state) {
 export function getTransactionMails(state) {
   return state.transactionMails;
 }
+
 export function getMails(state) {
   return state.mails;
 }
