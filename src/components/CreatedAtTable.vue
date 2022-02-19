@@ -2,11 +2,11 @@
   <div class="q-pa-md">
     <div v-if="rows">
       <h3 class="title" style="text-align: center">
-        Mails created in the past 30 days
+        Mails created in the past 15 days
       </h3>
       <q-table
         v-if="rows"
-        title="Mails created in the past 30 days"
+        title="Mails created in the past 15 days"
         :rows="rows"
         :columns="columns"
         :filter="filter"
