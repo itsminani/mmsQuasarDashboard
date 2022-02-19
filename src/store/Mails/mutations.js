@@ -13,3 +13,6 @@ export const SET_TRANSACTION_MAILS= (state, Mails) => {
 export const SET_ALL_MAILS= (state, Mails) => {
   state.mails = Mails;
 };
+export const SET_LAST_UPDATED= (state, lastUpdated) => {
+  state.lastUpdated = lastUpdated;
+};

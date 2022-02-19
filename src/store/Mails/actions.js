@@ -8,7 +8,8 @@ export const fetchAnalytics = async ({ commit }) => {
     });
     var mails = response.data.listReportingTables.items;
     console.log(mails);
-
+    var lastUpdated = mails[0].last_updated
+    console.log(lastUpdated)
     
     for (let category of mails){
       console.log(category.id)
@@ -38,7 +39,7 @@ export const fetchAnalytics = async ({ commit }) => {
     commit("SET_CREATED_MAILS", createdMails);
     commit("SET_TO_SEE_DOCTOR_MAILS", toSeeDoctorMails);
     commit("SET_TRANSACTION_MAILS", transactionMails);
-    commit("SET_ALL_MAILS", mails);
+    commit("SET_LAST_UPDATED", lastUpdated);
   } catch (error) {
     console.log(error);
   }

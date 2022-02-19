@@ -5,5 +5,6 @@ export default function () {
     updatedMails: null,
     transactionMails: null,
     mails: null,
+    lastUpdated: null
   };
 }

@@ -2,6 +2,9 @@
   <div class="home">
     <div v-if="seeDoctorRows || updatedAtRows || createdAtRows" class="Loader">
       <div class="q-gutter-sm" style="text-align: center">
+        <h5>
+          Last Updated: <b> {{ lastUpdated }}</b>
+        </h5>
         <p>Display By:</p>
         <q-radio
           v-model="filterName1"
@@ -90,6 +93,7 @@ export default {
       updatedAtRows: "mails/getUpdatedMails",
       createdAtRows: "mails/getCreatedMails",
       transactionRows: "mails/getTransactionMails",
+      lastUpdated: "mails/getLastUpdated",
     }),
   },
 };

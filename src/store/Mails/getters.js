@@ -14,3 +14,6 @@ export function getTransactionMails(state) {
 export function getMails(state) {
   return state.mails;
 }
+export function getLastUpdated(state) {
+  return state.lastUpdated;
+}
